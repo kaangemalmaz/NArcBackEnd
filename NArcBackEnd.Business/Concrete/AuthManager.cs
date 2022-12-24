@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
+using NArcBackEnd.Core.CrossCuttingConcerns.Validation;
 using NArcBackEnd.Core.Utilities.Hashing;
 using NArcBackEnd.Entities.Concrete;
 using NArcBackEnd.Entities.Dto;
@@ -33,10 +34,8 @@ namespace NArcBackEnd.Business.Concrete
 
         public string Register(AuthRegisterDto authRegisterDto)
         {
-            UserValidator validationRules = new UserValidator();
-            ValidationResult result = validationRules.Validate(authRegisterDto);
-            if (!result.IsValid)
-                return "Zorunlu alanları doldurunuz.";
+            UserValidator rules = new UserValidator();
+            ValidationTools.Validate(rules, authRegisterDto);
 
             _userService.Add(authRegisterDto);
             return "işlem başarılı";

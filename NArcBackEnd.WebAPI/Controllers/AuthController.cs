@@ -20,8 +20,13 @@ namespace NArcBackEnd.WebAPI.Controllers
         [HttpPost("Register")]
         public IActionResult Register(AuthRegisterDto authDto)
         {
-            _authService.Register(authDto);
-            return Ok("Kullanici kayit başarı ile tamamlandı!");
+            var result = _authService.Register(authDto);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+            
         }
 
         [HttpPost("Login")]

@@ -2,7 +2,10 @@
 using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
 using NArcBackEnd.Core.CrossCuttingConcerns.Validation;
+using NArcBackEnd.Core.Utilities.Business;
 using NArcBackEnd.Core.Utilities.Hashing;
+using NArcBackEnd.Core.Utilities.Result.Abstract;
+using NArcBackEnd.Core.Utilities.Result.Concrete;
 using NArcBackEnd.Entities.Concrete;
 using NArcBackEnd.Entities.Dto;
 
@@ -29,16 +32,46 @@ namespace NArcBackEnd.Business.Concrete
                 return "Kullanici girişi başarılıdır.";
             }
             return "Kullanici bilgileri hatali";
-            
+
         }
 
-        public string Register(AuthRegisterDto authRegisterDto)
+        public IResult Register(AuthRegisterDto authRegisterDto)
         {
+            int imgSize = 2;
+
             UserValidator rules = new UserValidator();
             ValidationTools.Validate(rules, authRegisterDto);
 
+            //business rules configuration
+            var result = BusinessRules.Run(
+                CheckIfEmailExists(authRegisterDto.Email),
+                CheckIfImageSizeOneMbAbove(imgSize)
+            );
+
+            if (!result.Success) return result;
+            //if (result != null) return result;
+
             _userService.Add(authRegisterDto);
-            return "işlem başarılı";
+            return new SuccessResult("İşlem başarı ile tamamlanmıştır.");
+
         }
+
+
+        private IResult CheckIfEmailExists(string email)
+        {
+            User user = _userService.GetByEmail(email);
+            if (user != null) return new ErrorResult("Bu email adresi kullanılmaktadır.");
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfImageSizeOneMbAbove(int imageSize)
+        {
+            if (imageSize > 1)
+            {
+                return new ErrorResult("Dosya boyutu 1mbdan büyük olamaz");
+            }
+            return new SuccessResult();
+        }
+
     }
 }

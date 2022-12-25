@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.Concrete;
+using NArcBackEnd.Core.Utilities.Interceptors;
 using NArcBackEnd.DataAccess.Abstract;
 using NArcBackEnd.DataAccess.Concrete.EntityFramework;
 
@@ -19,6 +21,16 @@ namespace NArcBackEnd.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
+
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly(); // çalışan assembly yi al.
+
+            //buna bir bak sen yinede!
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces().EnableInterfaceInterceptors(
+                new Castle.DynamicProxy.ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
         }
     }
 }

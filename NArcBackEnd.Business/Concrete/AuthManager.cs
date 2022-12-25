@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
+using NArcBackEnd.Core.Aspects.Validation;
 using NArcBackEnd.Core.CrossCuttingConcerns.Validation;
 using NArcBackEnd.Core.Utilities.Business;
 using NArcBackEnd.Core.Utilities.Hashing;
@@ -35,12 +36,15 @@ namespace NArcBackEnd.Business.Concrete
 
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Register(AuthRegisterDto authRegisterDto)
         {
+
+            // AOP - CCC destekli olarak metod içinde yapılan işlemlerin method üzerinde attribute ile yapılmasıdır.
             int imgSize = 2;
 
-            UserValidator rules = new UserValidator();
-            ValidationTools.Validate(rules, authRegisterDto);
+            //UserValidator rules = new UserValidator();
+            //ValidationTools.Validate(rules, authRegisterDto);
 
             //business rules configuration
             var result = BusinessRules.Run(

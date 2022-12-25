@@ -20,7 +20,7 @@ namespace NArcBackEnd.Core.CrossCuttingConcerns.Validation
         public static void Validate(IValidator validator, object entity)
         {
 
-            var context = new ValidationContext<object>(entity);
+            var context = new ValidationContext<object>(entity); //Validation contextden oluşacak bir yapı için validate yapılabiliyor.
             var result = validator.Validate(context);
             if (!result.IsValid)
             {

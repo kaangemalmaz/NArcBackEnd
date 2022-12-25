@@ -12,7 +12,7 @@ namespace NArcBackEnd.Business.ValidationRules.FluentValidation
             RuleFor(u => u.Name).NotEmpty().WithMessage("Name boş olamaz");
             RuleFor(u => u.Email).NotEmpty().WithMessage("Email boş olamaz");
             RuleFor(u => u.Email).EmailAddress().WithMessage("Geçerli bir email adresi giriniz");
-            RuleFor(u => u.ImageUrl).NotEmpty().WithMessage("Image boş olamaz");
+            RuleFor(u => u.Image).NotEmpty().WithMessage("Image boş olamaz");
             RuleFor(u => u.Password).NotEmpty().WithMessage("Şifre boş olamaz")
                 .MinimumLength(6).WithMessage("Şifre en az 6 karakter olmalıdır")
                 .MaximumLength(15).WithMessage("Şifre en az 6 karakter olmalıdır")

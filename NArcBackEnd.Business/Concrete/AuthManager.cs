@@ -39,21 +39,15 @@ namespace NArcBackEnd.Business.Concrete
         [ValidationAspect(typeof(UserValidator))]
         public IResult Register(AuthRegisterDto authRegisterDto)
         {
-
-            // AOP - CCC destekli olarak metod içinde yapılan işlemlerin method üzerinde attribute ile yapılmasıdır.
-            int imgSize = 2;
-
-            //UserValidator rules = new UserValidator();
-            //ValidationTools.Validate(rules, authRegisterDto);
-
             //business rules configuration
             var result = BusinessRules.Run(
                 CheckIfEmailExists(authRegisterDto.Email),
-                CheckIfImageSizeOneMbAbove(imgSize)
+                CheckIfImageExtensionsAllow(authRegisterDto.Image.FileName),
+                CheckIfImageSizeOneMbAbove(authRegisterDto.Image.Length)
             );
 
-            if (!result.Success) return result;
-            //if (result != null) return result;
+            if (result != null) return result;
+            
 
             _userService.Add(authRegisterDto);
             return new SuccessResult("İşlem başarı ile tamamlanmıştır.");
@@ -68,11 +62,25 @@ namespace NArcBackEnd.Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckIfImageSizeOneMbAbove(int imageSize)
+        private IResult CheckIfImageSizeOneMbAbove(long imageSize)
         {
-            if (imageSize > 1)
+            decimal imgMbSize = Convert.ToDecimal(imageSize * 0.000001); // IFormFile dosyayı byte olarak verir mb'a çeviriyoruz.
+            if (imgMbSize > 1)
             {
                 return new ErrorResult("Dosya boyutu 1mbdan büyük olamaz");
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfImageExtensionsAllow(string fileName)
+        {
+            var extension = (fileName.Substring(fileName.LastIndexOf('.') + 1)).ToLower();
+
+            List<string> AllowFileExtensions = new List<string> { "jpg", "jpeg", "gif", "png" };
+
+            if (!AllowFileExtensions.Contains(extension))
+            {
+                return new ErrorResult("Eklediğiniz resim jpg, jpeg, gif, png tiplerinden biri olmalıdır");
             }
             return new SuccessResult();
         }

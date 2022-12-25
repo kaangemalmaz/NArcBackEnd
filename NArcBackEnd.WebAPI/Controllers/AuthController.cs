@@ -18,14 +18,14 @@ namespace NArcBackEnd.WebAPI.Controllers
 
 
         [HttpPost("Register")]
-        public IActionResult Register(AuthRegisterDto authDto)
+        public IActionResult Register([FromForm] AuthRegisterDto authDto) //imagei apiden almak için fromform eklendi!
         {
             var result = _authService.Register(authDto);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
             
         }
 

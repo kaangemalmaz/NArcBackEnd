@@ -5,7 +5,7 @@ using NArcBackEnd.Entities.Concrete;
 
 namespace NArcBackEnd.DataAccess.Concrete.EntityFramework
 {
-    internal class EfUserOperationClaimDal : EfEntityRepositoryBase<UserOperationClaim, BackEndContextDb>, IUserOperationClaimDal
+    public class EfUserOperationClaimDal : EfEntityRepositoryBase<UserOperationClaim, BackEndContextDb>, IUserOperationClaimDal
     {
     }
 }

@@ -19,8 +19,41 @@ namespace NArcBackEnd.WebAPI.Controllers
         [HttpPost]
         public IActionResult Add(OperationClaim operationClaim)
         {
-            _operationClaimService.Add(operationClaim);
-            return Ok("Kayıt işlemi başarili");
+            var result = _operationClaimService.Add(operationClaim);
+            if(result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpPut]
+        public IActionResult Update(OperationClaim operationClaim)
+        {
+            var result = _operationClaimService.Update(operationClaim);
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(OperationClaim operationClaim)
+        {
+            var result = _operationClaimService.Delete(operationClaim);
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            var result = _operationClaimService.GetList();
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var result = _operationClaimService.GetById(id);
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
         }
     }
 }

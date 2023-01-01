@@ -3,6 +3,7 @@ using Autofac.Extras.DynamicProxy;
 using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.Concrete;
 using NArcBackEnd.Core.Utilities.Interceptors;
+using NArcBackEnd.Core.Utilities.Security.JWT;
 using NArcBackEnd.DataAccess.Abstract;
 using NArcBackEnd.DataAccess.Concrete.EntityFramework;
 
@@ -24,6 +25,9 @@ namespace NArcBackEnd.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>();
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
+
+            //jwt
+            builder.RegisterType<TokenHandler>().As<ITokenHandler>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly(); // çalışan assembly yi al.

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace NArcBackEnd.Core.DataAccess.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
-        where TEntity : BaseEntity, new()
+        where TEntity : class, new()
         where TContext : DbContext, new()
     {
         public void Add(TEntity entity)

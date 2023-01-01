@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace NArcBackEnd.Core.DataAccess
 {
-    public interface IEntityRepository<TEntity> where TEntity : BaseEntity, new()
+    public interface IEntityRepository<TEntity> where TEntity : class, new()
     {
         void Add(TEntity entity);
         void Update(TEntity entity);

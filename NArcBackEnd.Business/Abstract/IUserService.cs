@@ -13,6 +13,8 @@ namespace NArcBackEnd.Business.Abstract
         IDataResult<List<User>> GetList();
         User GetByEmail(string email);
         IDataResult<User> GetById(int id);
+
+        List<OperationClaim> GetUserOperationClaims(int userId);
         
     }
 }

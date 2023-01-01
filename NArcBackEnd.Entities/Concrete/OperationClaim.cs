@@ -1,9 +1,10 @@
-﻿using NArcBackEnd.Core.Entities;
+﻿
 
 namespace NArcBackEnd.Entities.Concrete
 {
-    public class OperationClaim : BaseEntity, IEntity
+    public class OperationClaim 
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

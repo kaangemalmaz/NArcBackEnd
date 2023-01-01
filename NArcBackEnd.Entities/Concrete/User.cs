@@ -1,9 +1,9 @@
-﻿using NArcBackEnd.Core.Entities;
-
+﻿
 namespace NArcBackEnd.Entities.Concrete
 {
-    public class User : BaseEntity, IEntity
+    public class User 
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }

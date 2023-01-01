@@ -7,6 +7,7 @@ using NArcBackEnd.Core.Utilities.Business;
 using NArcBackEnd.Core.Utilities.Hashing;
 using NArcBackEnd.Core.Utilities.Result.Abstract;
 using NArcBackEnd.Core.Utilities.Result.Concrete;
+using NArcBackEnd.Core.Utilities.Security.JWT;
 using NArcBackEnd.Entities.Concrete;
 using NArcBackEnd.Entities.Dto;
 
@@ -15,24 +16,31 @@ namespace NArcBackEnd.Business.Concrete
     public class AuthManager : IAuthService
     {
         private readonly IUserService _userService;
+        private readonly ITokenHandler _tokenHandler;
 
-        public AuthManager(IUserService userService)
+        public AuthManager(IUserService userService, ITokenHandler tokenHandler)
         {
             _userService = userService;
+            _tokenHandler = tokenHandler;
         }
 
-        public string Login(AuthLoginDto authLoginDto)
+        public IDataResult<Token> Login(AuthLoginDto authLoginDto)
         {
             //Cross cutting concers - Uygulamayı dikine kesmek.
             //AOP
 
             var user = _userService.GetByEmail(authLoginDto.Email);
             var passwordResult = HashingHelper.VerifyPasswordHash(authLoginDto.Password, user.PasswordHash, user.PasswordSalt);
+
             if (passwordResult)
             {
-                return "Kullanici girişi başarılıdır.";
+                List<OperationClaim> operationClaims = _userService.GetUserOperationClaims(user.Id);
+                Token token = new Token();
+                token = _tokenHandler.CreateToken(user, operationClaims);
+                return new SuccessDataResult<Token>(token);
             }
-            return "Kullanici bilgileri hatali";
+
+            return new ErrorDataResult<Token>("Kullanici maili yada şifre bilgisi yanlıştır.");
 
         }
 

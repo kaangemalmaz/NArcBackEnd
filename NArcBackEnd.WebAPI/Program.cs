@@ -56,7 +56,9 @@ app.UseCors("AllowOrigin"); //corsa verilen isim verilir. uygulamanýn asýl ayaða
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication(); //giriþ
+
+app.UseAuthorization(); //yetki
 
 app.MapControllers();
 

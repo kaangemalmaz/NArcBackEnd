@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NArcBackEnd.Core\NArcBackEnd.Core.csproj" />
     <ProjectReference Include="..\NArcBackEnd.Entities\NArcBackEnd.Entities.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Entities.Concrete;
 
@@ -41,6 +42,7 @@ namespace NArcBackEnd.WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="GetList")]
         public IActionResult GetList()
         {
             var result = _operationClaimService.GetList();

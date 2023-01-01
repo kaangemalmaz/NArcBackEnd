@@ -91,5 +91,10 @@ namespace NArcBackEnd.Business.Concrete
             return new SuccessResult(Messages.PasswordChanged);
 
         }
+
+        public List<OperationClaim> GetUserOperationClaims(int userId)
+        {
+            return _userDal.GetUserOperationClaims(userId);
+        }
     }
 }

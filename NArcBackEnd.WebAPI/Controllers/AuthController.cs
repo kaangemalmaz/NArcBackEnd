@@ -33,7 +33,11 @@ namespace NArcBackEnd.WebAPI.Controllers
         public IActionResult Login(AuthLoginDto authLoginDto)
         {
             var result = _authService.Login(authLoginDto);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

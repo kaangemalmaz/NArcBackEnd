@@ -1,6 +1,7 @@
 ﻿using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.Constans;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
+using NArcBackEnd.Core.Aspects.Transaction;
 using NArcBackEnd.Core.Aspects.Validation;
 using NArcBackEnd.Core.Utilities.Hashing;
 using NArcBackEnd.Core.Utilities.Result.Abstract;
@@ -75,6 +76,7 @@ namespace NArcBackEnd.Business.Concrete
         }
 
         [ValidationAspect(typeof(UserChangePasswordValidator))]
+        [TransactionAspect]
         public IResult ChangePassword(UserChangePasswordDto userChangePasswordDto) //Password Change
         {
 

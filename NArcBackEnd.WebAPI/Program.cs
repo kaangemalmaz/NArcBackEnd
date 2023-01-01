@@ -3,6 +3,9 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using NArcBackEnd.Business.DependencyResolvers.Autofac;
+using NArcBackEnd.Core.DependencyResolvers;
+using NArcBackEnd.Core.Extensions;
+using NArcBackEnd.Core.Utilities.IoC;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +44,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecurityKey"])), //token deðerinin bize ait olduðunu doðrulayan yapýdýr. yani oluþturankey bize ait odur.
         ClockSkew = TimeSpan.Zero //expression süresine bu süreyi ekler. server ile bilgisayar arasý farkdan dolayý bu var.
     };
+});
+
+builder.Services.AddDependencyResolvers(new ICoreModule[]
+{
+    new CoreModule()
 });
 
 var app = builder.Build();

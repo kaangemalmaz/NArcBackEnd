@@ -42,7 +42,7 @@ namespace NArcBackEnd.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="GetList")]
+        //[Authorize(Roles ="GetList")] // buradaki yapıyı program.csdeki authentication ve authorization yapısı ile bulmaktadır. Userdan claimslerine gidip oradan bakmaktadır yine.
         public IActionResult GetList()
         {
             var result = _operationClaimService.GetList();

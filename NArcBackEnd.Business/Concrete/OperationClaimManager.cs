@@ -1,4 +1,5 @@
 ﻿using NArcBackEnd.Business.Abstract;
+using NArcBackEnd.Business.Aspects.Secured;
 using NArcBackEnd.Business.Constans;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
 using NArcBackEnd.Core.Aspects.Validation;
@@ -41,6 +42,11 @@ namespace NArcBackEnd.Business.Concrete
         {
             return new SuccessDataResult<OperationClaim>(_operationClaimDal.Get(o => o.Id == id));
         }
+
+
+        [SecuredAspect()]
+        //[SecuredAspect("Admin")]
+        //[SecuredAspect("Admin, GetList")]
 
         public IDataResult<List<OperationClaim>> GetList()
         {

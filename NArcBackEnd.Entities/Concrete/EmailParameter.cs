@@ -8,5 +8,6 @@
         public string Password { get; set; }
         public int Port { get; set; }
         public bool SSL { get; set; }
+        public bool Html { get; set; } // gönderilen yapının html e çevrilip çevrilemeyeceğini gösterir.
     }
 }

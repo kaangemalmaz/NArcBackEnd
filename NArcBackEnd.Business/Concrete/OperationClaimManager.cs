@@ -2,6 +2,7 @@
 using NArcBackEnd.Business.Aspects.Secured;
 using NArcBackEnd.Business.Constans;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
+using NArcBackEnd.Core.Aspects.Performans;
 using NArcBackEnd.Core.Aspects.Validation;
 using NArcBackEnd.Core.Utilities.Business;
 using NArcBackEnd.Core.Utilities.Result.Abstract;
@@ -44,9 +45,11 @@ namespace NArcBackEnd.Business.Concrete
         }
 
 
-        [SecuredAspect()]
+        //[SecuredAspect()]
         //[SecuredAspect("Admin")]
         //[SecuredAspect("Admin, GetList")]
+
+        [PerformansAspect()]
 
         public IDataResult<List<OperationClaim>> GetList()
         {

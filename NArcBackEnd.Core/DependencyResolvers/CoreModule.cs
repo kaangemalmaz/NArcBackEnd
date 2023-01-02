@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NArcBackEnd.Core.CrossCuttingConcerns.Caching;
 using NArcBackEnd.Core.CrossCuttingConcerns.Caching.Microsoft;
 using NArcBackEnd.Core.Utilities.IoC;
+using System.Diagnostics;
 
 namespace NArcBackEnd.Core.DependencyResolvers
 {
@@ -14,6 +15,7 @@ namespace NArcBackEnd.Core.DependencyResolvers
             services.AddMemoryCache();
             services.AddSingleton<ICacheManager, MemoryCacheManager>(); // injection
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); // Secured Aspect - 1 // core katmanında userin claimlerine ulaşmayı sağlar.
+            services.AddSingleton<Stopwatch>(); //kronometre tutmak gibi düşünebilirsin. Eğer işlem uzun sürerse bilgi vermesi için performans ölçümü sağlar.
         }
     }
 }

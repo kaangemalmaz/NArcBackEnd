@@ -42,5 +42,35 @@ namespace NArcBackEnd.Business.Concrete
 
             return fileName;
         }
+
+        public void FileDeleteToServer(string path)
+        {
+            try
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        public void FileDeleteToFtp(string path)
+        {
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp adresi " + path);
+                request.Credentials = new NetworkCredential("kullanici adi", "password");
+                request.Method = WebRequestMethods.Ftp.DeleteFile;
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
     }
 }

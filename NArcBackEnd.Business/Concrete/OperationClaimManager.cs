@@ -45,11 +45,11 @@ namespace NArcBackEnd.Business.Concrete
         }
 
 
-        //[SecuredAspect()]
+        [SecuredAspect()]
         //[SecuredAspect("Admin")]
         //[SecuredAspect("Admin, GetList")]
 
-        [PerformansAspect()]
+        //[PerformansAspect()]
 
         public IDataResult<List<OperationClaim>> GetList()
         {

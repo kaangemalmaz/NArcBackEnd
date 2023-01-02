@@ -59,6 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseCors("AllowOrigin"); //corsa verilen isim verilir. uygulamanýn asýl ayaða kalktýðý yer burasýdýr. uygulamaya izin veriyorsun.
 

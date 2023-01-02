@@ -1,6 +1,7 @@
 ﻿using NArcBackEnd.Business.Abstract;
 using NArcBackEnd.Business.Constans;
 using NArcBackEnd.Business.ValidationRules.FluentValidation;
+using NArcBackEnd.Core.Aspects.Caching;
 using NArcBackEnd.Core.Aspects.Transaction;
 using NArcBackEnd.Core.Aspects.Validation;
 using NArcBackEnd.Core.Utilities.Hashing;
@@ -23,6 +24,7 @@ namespace NArcBackEnd.Business.Concrete
             _fileService = fileService;
         }
 
+        [RemoveCacheAspect("IUserService.GetList")] // cache - 6 //regex sayesinde bunu buluyor.
         public async void Add(AuthRegisterDto authRegisterDto)
         {
             string fileName = _fileService.FileSaveToServer(authRegisterDto.Image, "./Content/img/");
@@ -65,6 +67,7 @@ namespace NArcBackEnd.Business.Concrete
             return new SuccessResult(Messages.DeletedUser);
         }
 
+        [CacheAspect(60)] // cache - 5
         public IDataResult<List<User>> GetList()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll());

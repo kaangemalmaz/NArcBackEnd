@@ -23,6 +23,12 @@
         public static string NotAvailableUserOperationClaim = "Bu yetki daha önce bu kullaniciya atanmiştir";
         public static string NotExitsOperationClaim = "Yetki bulunamamıştır.";
         public static string NotExitsUser = "User bulunamamıştır.";
-        
+
+
+        //OperationClaimMessages
+        public static string AddedEmailParameter = "Email başarıyla oluşturuldu";
+        public static string UpdatedEmailParameter = "Email başarıyla güncellendi";
+        public static string DeletedEmailParameter = "Email başarıyla silindi";
+
     }
 }

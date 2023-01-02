@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NArcBackEnd.Business.Abstract;
+using NArcBackEnd.Business.Repositories.UserOperationClaimRepository;
 using NArcBackEnd.Entities.Concrete;
 
 namespace NArcBackEnd.WebAPI.Controllers

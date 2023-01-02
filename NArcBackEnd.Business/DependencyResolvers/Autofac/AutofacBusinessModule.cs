@@ -1,11 +1,16 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
-using NArcBackEnd.Business.Abstract;
-using NArcBackEnd.Business.Concrete;
+using NArcBackEnd.Business.Authentication;
+using NArcBackEnd.Business.Repositories.EmailParameterRepository;
+using NArcBackEnd.Business.Repositories.OperationClaimRepository;
+using NArcBackEnd.Business.Repositories.UserOperationClaimRepository;
+using NArcBackEnd.Business.Repositories.UserRepository;
 using NArcBackEnd.Core.Utilities.Interceptors;
 using NArcBackEnd.Core.Utilities.Security.JWT;
-using NArcBackEnd.DataAccess.Abstract;
-using NArcBackEnd.DataAccess.Concrete.EntityFramework;
+using NArcBackEnd.DataAccess.Repositories.EmailParameterRepository;
+using NArcBackEnd.DataAccess.Repositories.OperationClaimRepository;
+using NArcBackEnd.DataAccess.Repositories.UserOperationClaimRepository;
+using NArcBackEnd.DataAccess.Repositories.UserRepository;
 
 namespace NArcBackEnd.Business.DependencyResolvers.Autofac
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NArcBackEnd.Business.Abstract;
+using NArcBackEnd.Business.Authentication;
 using NArcBackEnd.Entities.Dto;
 
 namespace NArcBackEnd.WebAPI.Controllers

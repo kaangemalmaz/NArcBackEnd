@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NArcBackEnd.Business.Abstract;
+using NArcBackEnd.Business.Repositories.UserRepository;
 using NArcBackEnd.Entities.Concrete;
 using NArcBackEnd.Entities.Dto;
 

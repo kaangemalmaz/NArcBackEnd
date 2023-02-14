@@ -25,5 +25,5 @@
 - Unit Of work
 
 ## _Principles_
-- solid prensible
+- Solid
 - DRY (Dont Repeat Yourself)
